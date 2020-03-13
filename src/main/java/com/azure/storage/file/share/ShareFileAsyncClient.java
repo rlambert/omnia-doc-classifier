@@ -901,8 +901,9 @@ public class ShareFileAsyncClient {
     Mono<Response<ShareFileProperties>> getPropertiesWithResponse(ShareRequestConditions requestConditions,
                                                                   Context context) {
         requestConditions = requestConditions == null ? new ShareRequestConditions() : requestConditions;
+        String fPath = (filePath.startsWith("/")) ? filePath.substring(1) : filePath;
         return azureFileStorageClient.files()
-            .getPropertiesWithRestResponseAsync(shareName, filePath, snapshot, null, requestConditions.getLeaseId(),
+            .getPropertiesWithRestResponseAsync(shareName, fPath, snapshot, null, requestConditions.getLeaseId(),
                 context)
             .map(this::getPropertiesResponse);
     }
