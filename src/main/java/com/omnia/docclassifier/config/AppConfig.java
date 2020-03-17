@@ -48,6 +48,50 @@ public class AppConfig {
 
     @NotNull
     @NotEmpty
-    private String blobSourceDocsKey;
+    private String azureSearchName;
+
+    @NotNull
+    @NotEmpty
+    private String azureSearchIndexName;
+
+    @NotNull
+    @NotEmpty
+    private String azureSearchAdminKey;
+
+    @NotNull
+    @NotEmpty
+    private String azureSearchQueryKey;
+
+    @NotNull
+    @NotEmpty
+    private String azureSearchApiVersion;
+
+    @NotNull
+    @NotEmpty
+    private String azureSearchUrl;
+
+    @NotNull
+    @NotEmpty
+    private String azureSearchIndexUrl;
+
+    @NotNull
+    @NotEmpty
+    private String azureSearchIndexerUrl;
+
+    @NotNull
+    @NotEmpty
+    private String azureSearchIndexingUrl;
+
+    @NotNull
+    @NotEmpty
+    private String azureSearchIndexLookupUrl;
+
+    @NotNull
+    @NotEmpty
+    private String azureSearchIndexExistsUrl;
+
+    @NotNull
+    @NotEmpty
+    private String azureSearchIndexDefinition;
 
 }

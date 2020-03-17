@@ -21,6 +21,7 @@
         <azure-files.version>12.2.0</azure-files.version>
         <azure-storage-common.version>12.4.0</azure-storage-common.version>
         <azure-webapp-plugin.version>1.9.0</azure-webapp-plugin.version>
+        <azure-storage.version>8.6.0</azure-storage.version>
     </properties>
 
     <dependencies>
@@ -28,26 +29,26 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-quartz</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.microsoft.azure</groupId>
             <artifactId>azure-keyvault-secrets-spring-boot-starter</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>com.microsoft.azure</groupId>-->
-<!--            <artifactId>azure-spring-boot-starter</artifactId>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>com.microsoft.azure</groupId>-->
-<!--            <artifactId>azure-storage-spring-boot-starter</artifactId>-->
-<!--        </dependency>-->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -61,13 +62,6 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
-        <dependency>
-            <groupId>org.apache.pdfbox</groupId>
-            <artifactId>pdfbox</artifactId>
-            <version>${pdfbox.version}</version>
-        </dependency>
-
 <!--        &lt;!&ndash; https://mvnrepository.com/artifact/com.azure/azure-storage-blob &ndash;&gt;-->
 <!--        <dependency>-->
 <!--            <groupId>com.azure</groupId>-->
@@ -78,7 +72,7 @@
         <dependency>
             <groupId>com.microsoft.azure</groupId>
             <artifactId>azure-storage</artifactId>
-            <version>8.6.0</version>
+            <version>${azure-storage.version}</version>
         </dependency>
 
         <dependency>
@@ -153,7 +147,7 @@
 
                     <!-- Web App information -->
                     <resourceGroup>omniaDocClassifierGroup</resourceGroup>
-                    <appName>docController</appName>
+                    <appName>docClassifierAPI</appName>
                     <region>centralus</region>
 
                     <!-- Java Runtime Stack for Web App on Linux-->
