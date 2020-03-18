@@ -36,6 +36,10 @@ public class AppConfig {
 
     @NotNull
     @NotEmpty
+    private String dataSourceTemplate;
+
+    @NotNull
+    @NotEmpty
     private String azureFileShareName;
 
     @NotNull
@@ -68,27 +72,7 @@ public class AppConfig {
 
     @NotNull
     @NotEmpty
-    private String azureSearchUrl;
-
-    @NotNull
-    @NotEmpty
-    private String azureSearchIndexUrl;
-
-    @NotNull
-    @NotEmpty
-    private String azureSearchIndexerUrl;
-
-    @NotNull
-    @NotEmpty
-    private String azureSearchIndexingUrl;
-
-    @NotNull
-    @NotEmpty
-    private String azureSearchIndexLookupUrl;
-
-    @NotNull
-    @NotEmpty
-    private String azureSearchIndexExistsUrl;
+    private String azureSearchBaseUrl;
 
     @NotNull
     @NotEmpty

@@ -149,6 +149,24 @@ public class HttpUtils {
         return (T) response.block();
     }
 
+    public static <T> T postWithHeader(WebClient client, String url, String bodyJson, String hdrKey, String hdrValue, Class resultClass) throws URISyntaxException {
+
+        Mono<T> response = (Mono<T>) client
+                .post()
+                .uri(new URI(url))
+                .header(hdrKey, hdrValue)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(BodyInserters.fromValue(bodyJson))
+                .retrieve()
+                .bodyToMono(resultClass).checkpoint("at bodyToFlux", true)
+                .onErrorResume(e -> {
+                    Exception ex = (Exception) e;
+                    return Mono.error(ex);
+                });
+
+        return (T) response.block();
+    }
+
     public static <T> T putWithHeader(WebClient client, String url, String bodyJson, String hdrKey, String hdrValue, Class resultClass) throws URISyntaxException {
 
         Mono<T> response = (Mono<T>) client

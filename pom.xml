@@ -22,6 +22,7 @@
         <azure-storage-common.version>12.4.0</azure-storage-common.version>
         <azure-webapp-plugin.version>1.9.0</azure-webapp-plugin.version>
         <azure-storage.version>8.6.0</azure-storage.version>
+        <string-template-version>4.2</string-template-version>
     </properties>
 
     <dependencies>
@@ -62,12 +63,11 @@
             <optional>true</optional>
         </dependency>
 
-<!--        &lt;!&ndash; https://mvnrepository.com/artifact/com.azure/azure-storage-blob &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>com.azure</groupId>-->
-<!--            <artifactId>azure-storage-blob</artifactId>-->
-<!--            <version>12.4.0</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.antlr</groupId>
+            <artifactId>ST4</artifactId>
+            <version>${string-template-version}</version>
+        </dependency>
 
         <dependency>
             <groupId>com.microsoft.azure</groupId>
