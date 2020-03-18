@@ -44,6 +44,73 @@ public class AzureSearchService {
     }
 
     /**
+     *   "name": "~Name~",
+     *   "description": "",
+     *   "dataSourceName": "~DataSourceName~",
+     *   "skillsetName": "~SkillsetName~",
+     *   "targetIndexName": "~IndexName~",
+     */
+
+    /**
+     * creates a data source
+     * @param serviceName - String, name of search service
+     * @param indexerName - String, name of data source
+     * @param description - String
+     * @param apiVersion - String, api version
+     * @return boolean, true if index exists
+     * @throws IOException, on connection error
+     * @throws InterruptedException - should never happen
+     * @throws URISyntaxException - when the URL is malformed
+     */
+    public boolean createIndexer(String templateName, String serviceName, String indexerName, String description,
+                                    String dataSourceName, String skillsetName, String indexName, String apiVersion)
+            throws IOException, InterruptedException, URISyntaxException {
+
+        AzureSearchService.log.info(String.format("Creating search data source %s...", dsName));
+
+        // azureSearchBaseUrl: https://%s.search.windows.net/%s?api-version=%s
+        String url = String.format(_config.getAzureSearchBaseUrl(), serviceName, "datasources/", apiVersion);
+
+        // build map of dynamic values to insert into template
+        Map<String, Object> dataMap = new HashMap<>();
+        dataMap.put("Name", dsName);
+        dataMap.put("Description", dsDescription);
+        dataMap.put("Type", dsType);
+        dataMap.put("ConnectionString", dsConnStr);
+        dataMap.put("ContainerName", dsContainerName);
+        dataMap.put("Query", dsContainerName);
+
+        String json = _templateUtils.transform(dataMap, _config.getDataSourceTemplate());
+
+        String resultStr = HttpUtils.postWithHeader(_client, url, json, APIKEY, _config.getAzureSearchAdminKey(), String.class);
+        return (!StringUtils.isNullOrEmpty(resultStr));
+    }
+
+    /**
+     * queries just to make sure the data source exists
+     * @param serviceName - String, name of search service
+     * @param indexerName - String, name index
+     * @param apiVersion - String, api version
+     * @return boolean, true if index exists
+     * @throws URISyntaxException - when the URL is malformed
+     */
+    public boolean searchIndexerExists(String serviceName, String indexerName, String apiVersion) throws URISyntaxException {
+        AzureSearchService.log.info(String.format("Checking if datasource %s exists...", indexerName));
+
+        // azureSearchBaseUrl: https://%s.search.windows.net/%s?api-version=%s
+        var url = String.format(_config.getAzureSearchBaseUrl(), serviceName, "indexers/" + indexerName, apiVersion);
+
+        try {
+            String resultStr = HttpUtils.getWithHeader(_client, url, APIKEY, _config.getAzureSearchAdminKey(), String.class);
+            return (!StringUtils.isNullOrEmpty(resultStr));
+        }
+        catch(Exception ex) {
+            // 404 maps to IOException
+            return false;
+        }
+    }
+
+    /**
      * deletes a data source
      * @param serviceName - String, name of search service
      * @param dsName - String, name of data source

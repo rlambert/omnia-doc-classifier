@@ -1,9 +1,5 @@
 package com.omnia.docclassifier.services;
 
-// Include the following imports to use blob APIs.
-
-// Include the following imports to use blob APIs.
-
 import com.omnia.docclassifier.config.AppConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +23,7 @@ public class AzureSearchServiceTest {
     @Autowired
     private AzureSearchService azureSearchService;
 
+    // Test DataSource CRUD
     @Test
     public void testDataSourceOperations() throws URISyntaxException, IOException, InterruptedException {
         final String TEST_DS_NAME = "test-search-datasource";
@@ -58,6 +55,7 @@ public class AzureSearchServiceTest {
 
     }
 
+    // Test IndexOperations CRUD
     @Test
     public void testIndexOperations() throws InterruptedException, IOException, URISyntaxException {
         final String TEST_NDX = "test-search-index";
