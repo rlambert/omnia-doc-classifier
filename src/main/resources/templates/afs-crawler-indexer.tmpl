@@ -5,13 +5,19 @@
   "skillsetName": "~SkillsetName~",
   "targetIndexName": "~IndexName~",
   "disabled": null,
-  "schedule": null,
+  "cache" : {
+      "storageConnectionString" : "~CacheStorageConnStr~",
+      "enableReprocessing": true
+  },
+  "schedule" : { "interval" : "PT1H", "startTime" : "2020-03-01T00:00:00Z" },
   "parameters": {
     "batchSize": null,
     "maxFailedItems": 0,
     "maxFailedItemsPerBatch": 0,
-    "base64EncodeKeys": null,
-    "configuration": {}
+    "base64EncodeKeys": true,
+    "configuration": {
+        “indexStorageMetadataOnlyForOversizedDocuments” : true
+    }
   },
   "fieldMappings": [
     {
@@ -39,6 +45,5 @@
       "sourceFieldName": "/document/content/keyphrases",
       "targetFieldName": "keyphrases"
     }
-  ],
-  "cache": null
+  ]
 }

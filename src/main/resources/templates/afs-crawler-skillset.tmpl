@@ -1,0 +1,162 @@
+{
+  "name": "~Name~",
+  "description": "Skillset created by DocClassifier API. skillsetName: ~Name~; contentField: content; enrichmentGranularity: document; knowledgeStoreStorageAccount: ~KnowledgeStoreStorageAccountName~;",
+  "skills": [
+    {
+      "@odata.type": "#Microsoft.Skills.Text.EntityRecognitionSkill",
+      "name": "#1",
+      "description": null,
+      "context": "/document/content",
+      "categories": [
+        "Person",
+        "Quantity",
+        "Organization",
+        "URL",
+        "Email",
+        "Location",
+        "DateTime"
+      ],
+      "defaultLanguageCode": "en",
+      "minimumPrecision": null,
+      "includeTypelessEntities": null,
+      "inputs": [
+        {
+          "name": "text",
+          "source": "/document/content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "persons",
+          "targetName": "people"
+        },
+        {
+          "name": "organizations",
+          "targetName": "organizations"
+        },
+        {
+          "name": "locations",
+          "targetName": "locations"
+        },
+        {
+          "name": "entities",
+          "targetName": "entities"
+        }
+      ]
+    },
+    {
+      "@odata.type": "#Microsoft.Skills.Text.KeyPhraseExtractionSkill",
+      "name": "#2",
+      "description": null,
+      "context": "/document/content",
+      "defaultLanguageCode": "en",
+      "maxKeyPhraseCount": null,
+      "inputs": [
+        {
+          "name": "text",
+          "source": "/document/content"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "keyPhrases",
+          "targetName": "keyphrases"
+        }
+      ]
+    },
+    {
+      "@odata.type": "#Microsoft.Skills.Util.ShaperSkill",
+      "name": "#3",
+      "description": null,
+      "context": "/document",
+      "inputs": [
+        {
+          "name": "content",
+          "source": "/document/content"
+        },
+        {
+          "name": "DateSchemeVersion",
+          "source": "/document/DateSchemeVersion"
+        },
+        {
+          "name": "SyncFileMetadata",
+          "source": "/document/SyncFileMetadata"
+        },
+        {
+          "name": "metadata_storage_content_type",
+          "source": "/document/metadata_storage_content_type"
+        },
+        {
+          "name": "metadata_storage_size",
+          "source": "/document/metadata_storage_size"
+        },
+        {
+          "name": "metadata_storage_last_modified",
+          "source": "/document/metadata_storage_last_modified"
+        },
+        {
+          "name": "metadata_storage_name",
+          "source": "/document/metadata_storage_name"
+        },
+        {
+          "name": "metadata_storage_path",
+          "source": "/document/metadata_storage_path"
+        },
+        {
+          "name": "metadata_content_type",
+          "source": "/document/metadata_content_type"
+        },
+        {
+          "name": "metadata_language",
+          "source": "/document/metadata_language"
+        },
+        {
+          "name": "metadata_author",
+          "source": "/document/metadata_author"
+        },
+        {
+          "name": "metadata_title",
+          "source": "/document/metadata_title"
+        },
+        {
+          "name": "metadata_creation_date",
+          "source": "/document/metadata_creation_date"
+        },
+        {
+          "name": "keyPhrases",
+          "source": "/document/content/keyphrases/*"
+        },
+        {
+          "name": "Entities",
+          "sourceContext": "/document/content/entities/*",
+          "inputs": [
+            {
+              "name": "Entity",
+              "source": "/document/content/entities/*/name"
+            },
+            {
+              "name": "EntityType",
+              "source": "/document/content/entities/*/type"
+            },
+            {
+              "name": "EntitySubType",
+              "source": "/document/content/entities/*/subType"
+            },
+            {
+              "name": "Url",
+              "source": "/document/content/entities/*/wikipediaUrl"
+            }
+          ]
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "targetName": "tableprojection"
+        }
+      ]
+    }
+  ],
+  "cognitiveServices": null,
+  "knowledgeStore": null
+}

@@ -76,6 +76,14 @@ public class AppConfig {
 
     @NotNull
     @NotEmpty
-    private String azureSearchIndexDefinition;
+    private String azureSearchIndexTemplate;
+
+    @NotNull
+    @NotEmpty
+    private String azureSearchIndexerTemplate;
+
+    @NotNull
+    @NotEmpty
+    private String azureSearchSkillsetTemplate;
 
 }
